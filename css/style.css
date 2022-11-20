@@ -369,7 +369,7 @@ section{
 
 .home{
    min-height: 60vh;
-   background:url(../images/home-bg.png) no-repeat;
+   background:url(../images/home-bg.jpg) no-repeat;
    background-size: cover;
    background-position: center;
    display: flex;
@@ -383,7 +383,7 @@ section{
 
 .home .content h3{
    text-transform: uppercase;
-   color:var(--black);
+   color:var(--white);
    font-size: 5.5rem;
 }
 
