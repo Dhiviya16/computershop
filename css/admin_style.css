@@ -3,7 +3,7 @@
 :root{
    --blue:#142c75;
    --red:#c0392b;
-   --orange:#f39c12;
+   --light-blue:#5597cc;
    --black:#333;
    --white:#fff;
    --light-color:#666;
@@ -126,7 +126,7 @@ section{
 }
 
 .option-btn{
-   background-color: var(--orange);
+   background-color: var(--light-blue);
 }
 
 .btn:hover,
@@ -195,7 +195,7 @@ section{
 }
 
 .header .flex .account-box div a{
-   color:var(--orange);
+   color:var(--light-blue);
 }
 
 .header .flex .account-box div a:hover{
@@ -366,7 +366,7 @@ section{
 
 .show-products .box-container{
    display: grid;
-   grid-template-columns: repeat(auto-fit, 30rem);
+   grid-template-columns: repeat(auto-fit, 50rem);
    gap:1.5rem;
    align-items: flex-start;
    max-width: 1200px;
@@ -386,10 +386,25 @@ section{
 
 .show-products .box-container .box .image{
    height: 30rem;
-   margin-bottom: .5rem;
+   margin: 1rem 0s;
 }
 
-.show-products .box-container .box .price{
+.show-products .box-container .box .name{
+   margin:1rem 0;
+   font-size: 2rem;
+   color:var(--black);
+   margin: 15px;
+   font-weight: 600;
+}
+
+.show-products .box-container .box .details{
+   line-height: 1.5;
+   color:var(--black);
+   font-size: 1.8rem;
+   padding:.8rem 0;
+}
+
+.show-products .box-container .box .stockcount{
    background-color: var(--blue);
    position: absolute;
    top:1rem; left:1rem;
@@ -397,19 +412,6 @@ section{
    color:var(--white);
    padding:1rem;
    font-size: 2rem;
-}
-
-.show-products .box-container .box .name{
-   margin:1rem 0;
-   font-size: 2rem;
-   color:var(--black);
-}
-
-.show-products .box-container .box .details{
-   line-height: 1.5;
-   color:var(--light-color);
-   font-size: 1.5rem;
-   padding:.5rem 0;
 }
 
 .update-product form{
