@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 26, 2022 at 03:13 PM
+-- Generation Time: Nov 26, 2022 at 03:25 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -47,8 +47,18 @@ CREATE TABLE IF NOT EXISTS `cart` (
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
-  `orderID` varchar(255) NOT NULL,
-  PRIMARY KEY (`orderID`)
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `user_id` int(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `number` varchar(12) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `method` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `total_products` varchar(1000) NOT NULL,
+  `total_price` int(100) NOT NULL,
+  `placed_on` varchar(50) NOT NULL,
+  `payment_status` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
