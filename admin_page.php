@@ -97,14 +97,6 @@ if(!isset($admin_id)){
                     <p>total accounts</p>
                 </div>
 
-                <div class="box">
-                    <?php
-                        $select_messages = mysqli_query($conn, "SELECT * FROM `message`") or die('query failed');
-                        $number_of_messages = mysqli_num_rows($select_messages);
-                    ?>
-                    <h3><?php echo $number_of_messages; ?></h3>
-                    <p>new messages</p>
-                </div>
             </div>
 
         </section>
