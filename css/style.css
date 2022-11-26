@@ -368,7 +368,7 @@ section{
 
 .home .content h3{
    text-transform: uppercase;
-   color:var(--black);
+   color:var(--white);
    font-size: 5.5rem;
 }
 
