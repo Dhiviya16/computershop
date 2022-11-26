@@ -18,30 +18,30 @@ if(isset($_POST['add_product'])){
     $image = $_FILES['image']['name'];
     $image_size = $_FILES['image']['size'];
     $image_tmp_name = $_FILES['image']['tmp_name'];
-    $image_folter = 'uploaded_img/'.$image;
+    $image_folder = 'uploaded_img/'.$image;
 
     $tradeprice = mysqli_real_escape_string($conn, $_POST['tradePrice']);
     $retailprice = mysqli_real_escape_string($conn, $_POST['retailPrice']);
     $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
     $warranty = mysqli_real_escape_string($conn, $_POST['warranty']);
 
-    $select_barcode = mysqli_query($conn, "SELECT productBarCodeNum FROM `stocks` 
-    WHERE productBarCodeNum = '$barcode'") or die('query failed');
+    $select_barcode = mysqli_query($conn, "SELECT barcode FROM `products` 
+    WHERE barcode = '$barcode'") or die('query failed');
 
     if(mysqli_num_rows($select_barcode) > 0){
         $message[] = 'product barcode already exist!';
     }else{
-        $insert_product = mysqli_query($conn, "INSERT INTO `stocks`
-        (productBarCodeNum, productName, productSpecifications, productType, productManufacturingDate,
-        productImage, productTradePrice, productRetailPrice, productQuantity, productWarranty) 
+        $insert_product = mysqli_query($conn, "INSERT INTO `products`
+        (barcode, name, specifications, type, manufacturingDate,
+        image, tradePrice, retailPrice, quantity, warrantyAvailability) 
         VALUES('$barcode', '$name', '$specifications', '$product_type', '$manufacturingdate', '$image',
-        '$tradeprice', '$retailprice', '$quantity', '$warranty')") or die('query failed');
+        '$tradeprice', '$retailprice', '$quantity', '$warranty')") or die('unable to update to database');
 
         if($insert_product){
             if($image_size > 2000000){
                 $message[] = 'image size is too large!';
             }else{
-                move_uploaded_file($image_tmp_name, $image_folter);
+                move_uploaded_file($image_tmp_name, $image_folder);
                 $message[] = 'product added successfully!';
             }
         }
@@ -71,7 +71,7 @@ if(isset($_POST['add_product'])){
         <form action="" method="POST" enctype="multipart/form-data">
             <h3>Add Stock</h3>
             <label>Product Bar Code No.: </label>
-            <input type="text" class="box" required placeholder="enter barcode num" name="barcode">
+            <input type="text" class="box" required placeholder="enter barcode num" maxlength=12 name="barcode">
 
             <label>Product Name: </label>
             <input type="text" class="box" required placeholder="enter product name" name="name">
@@ -81,13 +81,13 @@ if(isset($_POST['add_product'])){
 
             <label>Product Type: </label>
             <select name="product_type" id="product_type" class="box" placeholder="--Select the type of product--" required>
-                <option value="laptop">Laptop</option>
-                <option value="computer">Computer</option>
-                <option value="monitor">Monitor</option>
-                <option value="mouse">Mouse</option>
-                <option value="keyboard">Keyboard</option>
-                <option value="accessories">Accessories</option>
-                <option value="others">Others</option>
+                <option value="Laptop">Laptop</option>
+                <option value="Computer">Computer</option>
+                <option value="Monitor">Monitor</option>
+                <option value="Mouse">Mouse</option>
+                <option value="Keyboard">Keyboard</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Others">Others</option>
             </select>
 
             <label>Product Manufacturing Date: </label>
@@ -116,8 +116,8 @@ if(isset($_POST['add_product'])){
 
             <label>Warranty Availability: </label>
             <div class="box radiocontainer">
-                <input type="radio" name="warranty" id="radio_btn" class="radio" value="True" required>Yes</input>
-                <input type="radio" name="warranty" id="radio_btn" class="radio" value="False">No</input>
+                <input type="radio" name="warranty" id="radio_btn" class="radio" value="1" required>Yes</input>
+                <input type="radio" name="warranty" id="radio_btn" class="radio" value="0">No</input>
             </div>
 
             <input type="submit" value="add product" name="add_product" class="btn">
