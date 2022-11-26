@@ -454,6 +454,18 @@ section{
    border-radius: .5rem;
 }
 
+.update-product label{
+   width:100%;
+   font-size:small;
+   font-weight: 500;
+   margin: 100px 0 0 0;
+}
+
+.update-product span {
+   font-size: small;
+}
+
+
 .placed-orders .box-container{
    display: grid;
    grid-template-columns: repeat(auto-fit, 33rem);
