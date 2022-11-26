@@ -50,7 +50,7 @@ if(isset($_POST['update_quantity'])){
 <?php @include 'header.php'; ?>
 
 <section class="heading">
-    <h3>shopping cart</h3>
+    <h3>Shopping Cart</h3>
     <p> <a href="home.php">home</a> / cart </p>
 </section>
 
@@ -67,17 +67,17 @@ if(isset($_POST['update_quantity'])){
             while($fetch_cart = mysqli_fetch_assoc($select_cart)){
     ?>
     <div  class="box">
-        <a href="cart.php?delete=<?php echo $fetch_cart['id']; ?>" class="fas fa-times" onclick="return confirm('delete this from cart?');"></a>
-        <a href="view_page.php?pid=<?php echo $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
+        <a href="cart.php?delete=<?php echo $fetch_cart['id']; ?>" class="fas fa-times" onclick="return confirm('Delete this from cart?');"></a>
+        <a href="view_page.php?pbarcode=<?php echo $fetch_cart['pbarcode']; ?>" class="fas fa-eye"></a>
         <img src="uploaded_img/<?php echo $fetch_cart['image']; ?>" alt="" class="image">
         <div class="name"><?php echo $fetch_cart['name']; ?></div>
-        <div class="price">RM<?php echo $fetch_cart['price']; ?></div>
+        <div class="price">$<?php echo $fetch_cart['price']; ?></div>
         <form action="" method="post">
             <input type="hidden" value="<?php echo $fetch_cart['id']; ?>" name="cart_id">
             <input type="number" min="1" value="<?php echo $fetch_cart['quantity']; ?>" name="cart_quantity" class="qty">
             <input type="submit" value="update" class="option-btn" name="update_quantity">
         </form>
-        <div class="sub-total"> Sub-total : <span>RM<?php echo $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span> </div>
+        <div class="sub-total"> Sub-total : <span>$<?php echo $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></span> </div>
     </div>
     <?php
     $grand_total += $sub_total;
@@ -93,7 +93,7 @@ if(isset($_POST['update_quantity'])){
     </div>
 
     <div class="cart-total">
-        <p>Grand total : <span>RM<?php echo $grand_total; ?></span></p>
+        <p>Grand total : <span>$<?php echo $grand_total; ?></span></p>
         <a href="shop.php" class="option-btn">Continue shopping</a>
         <a href="checkout.php" class="btn  <?php echo ($grand_total > 1)?'':'disabled' ?>">Proceed to checkout</a>
     </div>
