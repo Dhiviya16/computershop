@@ -30,7 +30,7 @@ if(isset($_POST['add_to_cart'])){
             mysqli_query($conn, "DELETE FROM `wishlist` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
         }
 
-        mysqli_query($conn, "INSERT INTO `cart`(user_id, pid, name, price, quantity, image) VALUES('$user_id', '$product_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
+        mysqli_query($conn, "INSERT INTO `cart`(user_id, pbarcode, name, price, quantity, image) VALUES('$user_id', '$product_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
         $message[] = 'product added to cart';
     }
 
@@ -86,12 +86,12 @@ if(isset($_GET['delete_all'])){
             while($fetch_wishlist = mysqli_fetch_assoc($select_wishlist)){
     ?>
     <form action="" method="POST" class="box">
-        <a href="wishlist.php?delete=<?php echo $fetch_wishlist['id']; ?>" class="fas fa-times" onclick="return confirm('delete this from wishlist?');"></a>
-        <a href="view_page.php?pid=<?php echo $fetch_wishlist['pid']; ?>" class="fas fa-eye"></a>
+        <a href="wishlist.php?delete=<?php echo $fetch_wishlist['id']; ?>" class="fas fa-times" onclick="return confirm('Delete this from wishlist?');"></a>
+        <a href="view_page.php?pbarcode=<?php echo $fetch_wishlist['pbarcode']; ?>" class="fas fa-eye"></a>
         <img src="uploaded_img/<?php echo $fetch_wishlist['image']; ?>" alt="" class="image">
         <div class="name"><?php echo $fetch_wishlist['name']; ?></div>
-        <div class="price">RM<?php echo $fetch_wishlist['price']; ?></div>
-        <input type="hidden" name="product_id" value="<?php echo $fetch_wishlist['pid']; ?>">
+        <div class="price">$<?php echo $fetch_wishlist['price']; ?>/-</div>
+        <input type="hidden" name="product_id" value="<?php echo $fetch_wishlist['pbarcode']; ?>">
         <input type="hidden" name="product_name" value="<?php echo $fetch_wishlist['name']; ?>">
         <input type="hidden" name="product_price" value="<?php echo $fetch_wishlist['price']; ?>">
         <input type="hidden" name="product_image" value="<?php echo $fetch_wishlist['image']; ?>">
@@ -108,9 +108,9 @@ if(isset($_GET['delete_all'])){
     </div>
 
     <div class="wishlist-total">
-        <p>Grand total : <span>RM<?php echo $grand_total; ?></span></p>
+        <p>Grand total : <span>$<?php echo $grand_total; ?></span></p>
         <a href="shop.php" class="option-btn">Continue shopping</a>
-        <a href="wishlist.php?delete_all" class="delete-btn <?php echo ($grand_total > 1)?'':'disabled' ?>" onclick="return confirm('delete all from wishlist?');">Delete All</a>
+        <a href="wishlist.php?delete_all" class="delete-btn <?php echo ($grand_total > 1)?'':'disabled' ?>" onclick="return confirm('Delete all from wishlist?');">Delete All</a>
     </div>
 
 </section>
