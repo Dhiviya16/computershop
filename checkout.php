@@ -36,13 +36,13 @@ if(isset($_POST['order'])){
     $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' AND email = '$email' AND method = '$method' AND address = '$address' AND total_products = '$total_products' AND total_price = '$cart_total'") or die('query failed');
 
     if($cart_total == 0){
-        $message[] = 'your cart is empty!';
+        $message[] = 'Your cart is empty!';
     }elseif(mysqli_num_rows($order_query) > 0){
-        $message[] = 'order placed already!';
+        $message[] = 'Order placed already!';
     }else{
         mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES ('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('query failed here');
         mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-        $message[] = 'order placed successfully!';
+        $message[] = 'Order placed successfully!';
     }
 }
 
@@ -99,48 +99,46 @@ if(isset($_POST['order'])){
 
         <div class="flex">
             <div class="inputBox">
-                <span>your name :</span>
+                <span>Name :</span>
                 <input type="text" name="name" placeholder="enter your name">
             </div>
             <div class="inputBox">
-                <span>your number :</span>
+                <span>Contact number :</span>
                 <input type="text" name="number" min="0" placeholder="enter your number">
             </div>
             <div class="inputBox">
-                <span>your email :</span>
+                <span>Email :</span>
                 <input type="email" name="email" placeholder="enter your email">
             </div>
             <div class="inputBox">
-                <span>payment method :</span>
+                <span>Payment method :</span>
                 <select name="method">
-                    <option value="cash on delivery">cash on delivery</option>
-                    <option value="credit card">credit card</option>
-                    <option value="paypal">paypal</option>
-                    <option value="paytm">paytm</option>
+                    <option value="cash on delivery">Cash on delivery</option>
+                    <option value="credit card">Credit card</option>
                 </select>
             </div>
             <div class="inputBox">
-                <span>address line 01 :</span>
+                <span>Address line 01 :</span>
                 <input type="text" name="flat" placeholder="e.g. flat no.">
             </div>
             <div class="inputBox">
-                <span>address line 02 :</span>
+                <span>Address line 02 :</span>
                 <input type="text" name="street" placeholder="e.g.  street name">
             </div>
             <div class="inputBox">
-                <span>city :</span>
-                <input type="text" name="city" placeholder="e.g. mumbai">
+                <span>City :</span>
+                <input type="text" name="city" placeholder="e.g. Georgetown">
             </div>
             <div class="inputBox">
-                <span>state :</span>
-                <input type="text" name="state" placeholder="e.g. maharashtra">
+                <span>State :</span>
+                <input type="text" name="state" placeholder="e.g. Penang">
             </div>
             <div class="inputBox">
-                <span>country :</span>
-                <input type="text" name="country" placeholder="e.g. india">
+                <span>Country :</span>
+                <input type="text" name="country" placeholder="e.g. Malaysia">
             </div>
             <div class="inputBox">
-                <span>pin code :</span>
+                <span>Postcode :</span>
                 <input type="text" name="pin_code" placeholder="e.g. 123456">
             </div>
         </div>
