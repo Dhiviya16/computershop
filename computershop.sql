@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 27, 2022 at 05:40 AM
--- Server version: 8.0.21
--- PHP Version: 7.2.33
+-- Generation Time: Nov 27, 2022 at 06:45 AM
+-- Server version: 5.7.31
+-- PHP Version: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE IF NOT EXISTS `cart` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `user_id` int(100) NOT NULL,
   `pbarcode` varchar(100) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` double(100,2) NOT NULL,
-  `quantity` int NOT NULL,
+  `quantity` int(100) NOT NULL,
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart`
@@ -54,19 +54,27 @@ INSERT INTO `cart` (`id`, `user_id`, `pbarcode`, `name`, `price`, `quantity`, `i
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `number` varchar(12) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `method` varchar(50) NOT NULL,
-  `address` varchar(500) NOT NULL,
-  `total_products` varchar(1000) NOT NULL,
-  `total_price` int NOT NULL,
-  `placed_on` varchar(50) NOT NULL,
-  `payment_status` varchar(20) NOT NULL,
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `user_id` int(100) NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `number` varchar(12) CHARACTER SET utf8mb4 NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `method` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `address` varchar(500) CHARACTER SET utf8mb4 NOT NULL,
+  `total_products` varchar(1000) CHARACTER SET utf8mb4 NOT NULL,
+  `total_price` int(100) NOT NULL,
+  `placed_on` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `payment_status` varchar(20) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
+(1, 7, 'Yann', '0123456789', 'yanyee0806@gmail.com', 'cash on delivery', 'abc123, def456, bayan lepas, malaysia - 12345', ', HP Laptop 15s-eq1557AU (1) ', 100, '27/11/2022', 'pending'),
+(2, 7, 'Yann', '0123456789', 'yanyee0806@gmail.com', 'cash on delivery', 'abc123, def456, bayan lepas, malaysia - 12345', ', HP USB-C to RJ45 Adapter (1) ', 21, '27/11/2022', 'pending');
 
 -- --------------------------------------------------------
 
@@ -84,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `image` varchar(255) NOT NULL,
   `tradePrice` double(100,2) NOT NULL,
   `retailPrice` double(100,2) NOT NULL,
-  `quantity` int NOT NULL,
+  `quantity` int(100) NOT NULL,
   `warrantyAvailability` tinyint(1) NOT NULL,
   PRIMARY KEY (`barcode`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -113,13 +121,13 @@ INSERT INTO `products` (`barcode`, `name`, `specifications`, `type`, `manufactur
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(100) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `user_type` varchar(11) DEFAULT 'user',
+  `user_type` varchar(100) DEFAULT 'user',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -130,7 +138,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`) VALUES
 (1, 'admin', 'admin@gmail.com', 'a4fd8e6fa9fbf9a6f2c99e7b70aa9ef2', 'admin'),
 (3, 'abc', 'yy@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'user'),
 (5, 'Lisa', 'lisa16@gmail.com', '7e9d2765a722aa496fafadbcb5f8cfc7', 'user'),
-(6, 'test', 'test@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'user');
+(6, 'test', 'test@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'user'),
+(7, 'customer1', 'customer1@gmail.com', 'a4fd8e6fa9fbf9a6f2c99e7b70aa9ef2', 'user');
 
 -- --------------------------------------------------------
 
@@ -140,8 +149,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`) VALUES
 
 DROP TABLE IF EXISTS `wishlist`;
 CREATE TABLE IF NOT EXISTS `wishlist` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `user_id` int(100) NOT NULL,
   `pbarcode` varchar(100) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` double(100,2) NOT NULL,
